@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
+const cors = require("cors"); // import cors
 const { limiter } = require("./middlewares/rateLimiter");
 const userRoutes = require("./routes/users");
 const articleRoutes = require("./routes/articles");
@@ -11,6 +12,9 @@ const { PORT = 3001 } = process.env;
 
 app.use(helmet());
 app.use(limiter);
+app.use(cors());
+
+// Routes
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
 
