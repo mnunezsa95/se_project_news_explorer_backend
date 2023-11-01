@@ -12,17 +12,20 @@ const articleRoutes = require("./routes/articles");
 // middlewares
 const { limiter } = require("./middlewares/rateLimiter");
 const { errorHandler } = require("./middlewares/errorHandler");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 // app
 const app = express(); // connect express to the app
 mongoose.connect("mongodb://127.0.0.1:27017/newsapp");
 const { PORT = 3001 } = process.env;
+
 app.use(helmet());
 app.use(limiter);
 app.use(cors());
-
+app.use(requestLogger);
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
