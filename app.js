@@ -14,6 +14,9 @@ const { limiter } = require("./middlewares/rateLimiter");
 const { errorHandler } = require("./middlewares/errorHandler");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 
+// controllers
+const { createUser, login } = require("./controllers/users");
+
 // app
 const app = express(); // connect express to the app
 mongoose.connect("mongodb://127.0.0.1:27017/newsapp");
@@ -23,6 +26,8 @@ app.use(helmet());
 app.use(limiter);
 app.use(cors());
 app.use(requestLogger);
+app.post("/signup", createUser);
+app.post("/signin", login);
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
 app.use(errorLogger);
