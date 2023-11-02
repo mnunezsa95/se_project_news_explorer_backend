@@ -8,6 +8,7 @@ const { errors } = require("celebrate");
 // routes
 const userRoutes = require("./routes/users");
 const articleRoutes = require("./routes/articles");
+const invalidRoute = require("./routes/invalidRoute");
 
 // middlewares
 const { limiter } = require("./middlewares/rateLimiter");
@@ -31,6 +32,7 @@ app.post("/signup", createUser);
 app.post("/signin", login);
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
+app.use(invalidRoute);
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
