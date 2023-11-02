@@ -5,6 +5,7 @@ const { JWT_SECRET } = require("../utils/config");
 const { ConflictError } = require("../errors/ConflictError");
 const { BadRequestError } = require("../errors/BadRequestError");
 
+// create a user based on incoming request
 const createUser = (req, res, next) => {
   const { email, password, username } = req.body;
   User.findOne({ email })
@@ -37,6 +38,8 @@ const getCurrentUser = (req, res, next) => {
     });
 };
 
-const login = (req, res, next) => {};
+const login = (req, res, next) => {
+  console.log(req, res, next);
+};
 
 module.exports = { createUser, getCurrentUser, login };
