@@ -6,7 +6,6 @@ const { ConflictError } = require("../errors/ConflictError");
 const { BadRequestError } = require("../errors/BadRequestError");
 
 const createUser = (req, res, next) => {
-  console.log(req.body);
   const { email, password, username } = req.body;
   User.findOne({ email })
     .then((existingUser) => {
@@ -16,7 +15,9 @@ const createUser = (req, res, next) => {
       return bcrypt.hash(password, 10);
     })
     .then((hash) => User.create({ email, password: hash, username }))
-    .then((user) => res.send({ email: user.email, username: user.username }))
+    .then((user) => {
+      res.send({ email: user.email, username: user.username });
+    })
     .catch((err) => {
       if (err.name === "ValidationError") {
         next(new BadRequestError("Invalid data sent to the server"));

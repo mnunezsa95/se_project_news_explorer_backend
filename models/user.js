@@ -10,13 +10,13 @@ const userSchema = new mongoose.Schema({
       validator(email) {
         return validator.isEmail(email);
       },
+      message: "You must enter a valid email",
     },
   },
   password: {
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 8,
+    minlength: 5,
     select: false, // hides from return
   },
   username: {
