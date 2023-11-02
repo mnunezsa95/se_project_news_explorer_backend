@@ -20,8 +20,11 @@ const { createUser, login } = require("./controllers/users");
 
 // app
 const app = express(); // connect express to the app
-mongoose.connect("mongodb://127.0.0.1:27017/newsapp");
 const { PORT = 3001 } = process.env;
+mongoose
+  .connect("mongodb://127.0.0.1:27017/newsapp")
+  .then(() => console.log("Connected to MongoDB"));
+mongoose.connection.on("error", (err) => console.log(err));
 
 app.use(helmet());
 app.use(limiter);
