@@ -16,9 +16,7 @@ const createUser = (req, res, next) => {
       return bcrypt.hash(password, 10);
     })
     .then((hash) => User.create({ email, password: hash, username }))
-    .then((user) => {
-      res.send({ email: user.email, username: user.username });
-    })
+    .then((user) => res.send({ email: user.email, username: user.username }))
     .catch((err) => {
       if (err.name === "ValidationError") {
         next(new BadRequestError("Invalid data sent to the server"));

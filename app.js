@@ -23,7 +23,7 @@ const app = express(); // connect express to the app
 const { PORT = 3001 } = process.env;
 mongoose
   .connect("mongodb://127.0.0.1:27017/newsapp")
-  .then(() => console.log("Connected to MongoDB"));
+  .then(() => console.log("Connection with MongoDB established"));
 mongoose.connection.on("error", (err) => console.log(err));
 
 app.use(helmet());
