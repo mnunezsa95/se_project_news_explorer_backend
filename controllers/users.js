@@ -26,6 +26,10 @@ const createUser = (req, res, next) => {
     });
 };
 
+const loginUser = (req, res, next) => {
+  console.log(req, res, next);
+};
+
 const getCurrentUser = (req, res, next) => {
   const userID = req.user._id;
   User.findById(userID)
@@ -36,8 +40,4 @@ const getCurrentUser = (req, res, next) => {
     });
 };
 
-const login = (req, res, next) => {
-  console.log(req, res, next);
-};
-
-module.exports = { createUser, getCurrentUser, login };
+module.exports = { createUser, getCurrentUser, loginUser };

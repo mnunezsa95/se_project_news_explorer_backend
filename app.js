@@ -16,7 +16,7 @@ const { errorHandler } = require("./middlewares/errorHandler");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 // controllers
-const { createUser, login } = require("./controllers/users");
+const { createUser, loginUser } = require("./controllers/users");
 
 // app
 const app = express(); // connect express to the app
@@ -32,7 +32,7 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
 app.post("/signup", createUser);
-app.post("/signin", login);
+app.post("/signin", loginUser);
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
 app.use(invalidRoute);
