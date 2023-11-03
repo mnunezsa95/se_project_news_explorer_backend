@@ -1,4 +1,4 @@
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = "dev-secret" } = process.env;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
@@ -28,12 +28,10 @@ const createUser = (req, res, next) => {
 };
 
 const loginUser = (req, res, next) => {
-  console.log(JWT_SECRET);
   const { email, password } = req.body;
   User.findOne({ email })
     .select("+password")
     .then((user) => {
-      console.log(password, user.password);
       if (!user) {
         return Promise.reject(
           new UnauthorizedError("Incorrect password or email"),

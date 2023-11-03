@@ -1,7 +1,7 @@
 // config
 require("dotenv").config();
 
-const { PORT } = process.env;
+const { PORT = 3001 } = process.env;
 // modules
 const express = require("express");
 const mongoose = require("mongoose");
