@@ -1,3 +1,7 @@
+// config
+require("dotenv").config();
+
+const { PORT } = process.env;
 // modules
 const express = require("express");
 const mongoose = require("mongoose");
@@ -20,7 +24,6 @@ const { createUser, loginUser } = require("./controllers/users");
 
 // app
 const app = express(); // connect express to the app
-const { PORT = 3001 } = process.env;
 mongoose
   .connect("mongodb://127.0.0.1:27017/newsapp")
   .then(() => console.log("Connection with MongoDB established"));
@@ -40,4 +43,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`App is listening at port ${PORT}`));
+app.listen(PORT, () => console.log(`App is listening at Port ${PORT}`));
