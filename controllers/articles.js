@@ -1,5 +1,6 @@
 const ArticleItem = require("../models/article");
-const { BadRequestError } = require("../errors/BadRequestError");
+const { NotFoundError } = require("../errors/NotFoundError");
+const { ForbiddenError } = require("../errors/ForbiddenError");
 
 const getArticles = (req, res, next) => {
   ArticleItem.find({})
@@ -22,15 +23,24 @@ const createArticle = (req, res, next) => {
     owner: req.user,
   })
     .then((article) => res.send(article))
-    .catch((err) => {
-      if (err.name === "ValidationError") {
-        next(new BadRequestError("invalid data sent to server"));
-      } else {
-        next(err);
-      }
-    });
+    .catch((err) => next(err));
 };
 
-const deleteArticle = () => {};
+const deleteArticle = (req, res, next) => {
+  const { articleId } = req.params;
+  ArticleItem.findById(articleId)
+    .orFail(() => {
+      throw new NotFoundError("An article with the specified id not found");
+    })
+    .then((article) => {
+      if (article.owner.equals(req.user._id)) {
+        return ArticleItem.findByIdAndDelete(articleId).then(() => {
+          res.send({ message: "Article successfully removed" });
+        });
+      }
+      throw new ForbiddenError("Cannot removed another user's article");
+    })
+    .catch((err) => next(err));
+};
 
 module.exports = { getArticles, createArticle, deleteArticle };
