@@ -18,6 +18,7 @@ const invalidRoute = require("./routes/invalidRoute");
 const { limiter } = require("./middlewares/rateLimiter");
 const { errorHandler } = require("./middlewares/errorHandler");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
+const { validateSignIn, validateSignUp } = require("./middlewares/validation");
 
 // controllers
 const { createUser, loginUser } = require("./controllers/users");
@@ -34,8 +35,8 @@ app.use(limiter);
 app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
-app.post("/signup", createUser);
-app.post("/signin", loginUser);
+app.post("/signup", validateSignUp, createUser);
+app.post("/signin", validateSignIn, loginUser);
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
 app.use(invalidRoute);

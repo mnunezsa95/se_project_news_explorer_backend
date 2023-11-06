@@ -8,7 +8,7 @@ const validateURL = (value, helpers) => {
   return helpers.error("string.uri");
 };
 
-const validateLogin = celebrate({
+const validateSignIn = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email().message({
       "string.empty": 'The "email" field must be filled in',
@@ -20,7 +20,7 @@ const validateLogin = celebrate({
   }),
 });
 
-const validateSignup = celebrate({
+const validateSignUp = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email().message({
       "string.empty": 'The "email" field must be filled in',
@@ -65,4 +65,4 @@ const validateArticleItem = celebrate({
   }),
 });
 
-module.exports = { validateLogin, validateSignup, validateArticleItem };
+module.exports = { validateSignIn, validateSignUp, validateArticleItem };
