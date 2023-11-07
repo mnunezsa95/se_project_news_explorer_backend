@@ -41,5 +41,5 @@ The News Explorer back-end component was built using Node.js, Express.js, and Mo
 
 ### Links
 
-- Domain: [https://](https://)
-- API Domain: [https://](https://)
+- Domain: [https://www.news-explorer.mooo.com](https://www.news-explorer.mooo.com), [https://news-explorer.mooo.com](https://news-explorer.mooo.com)
+- API Domain: [https://api.news-explorer.mooo.com](https://api.news-explorer.mooo.com)
