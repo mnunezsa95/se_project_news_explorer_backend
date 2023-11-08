@@ -9,7 +9,7 @@ const cors = require("cors");
 const { errors } = require("celebrate");
 
 // constants
-const { dbAdress, PORT } = require("./utils/config");
+const { PORT, DB_ADDRESS } = require("./utils/config");
 
 // routes
 const userRoutes = require("./routes/users");
@@ -29,7 +29,7 @@ const { createUser, loginUser } = require("./controllers/users");
 // app
 const app = express(); // connect express to the app
 mongoose
-  .connect(dbAdress)
+  .connect(DB_ADDRESS)
   .then(() => console.log("Connection with MongoDB established"));
 mongoose.connection.on("error", (err) => console.log(err));
 
