@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     select: false, // hides from return
   },
-  username: {
+  name: {
     type: String,
     required: true,
     minlength: 2,

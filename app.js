@@ -1,13 +1,15 @@
 // config
 require("dotenv").config();
 
-const { PORT = 3001 } = process.env;
 // modules
 const express = require("express");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const cors = require("cors");
 const { errors } = require("celebrate");
+
+// constants
+const { dbAdress, PORT } = require("./utils/config");
 
 // routes
 const userRoutes = require("./routes/users");
@@ -27,7 +29,7 @@ const { createUser, loginUser } = require("./controllers/users");
 // app
 const app = express(); // connect express to the app
 mongoose
-  .connect("mongodb://127.0.0.1:27017/newsapp")
+  .connect(dbAdress)
   .then(() => console.log("Connection with MongoDB established"));
 mongoose.connection.on("error", (err) => console.log(err));
 

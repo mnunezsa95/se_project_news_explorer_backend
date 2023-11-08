@@ -1,14 +1,14 @@
-const { JWT_SECRET = "dev-secret" } = process.env;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const { JWT_SECRET } = require("../utils/config");
 const { ConflictError } = require("../errors/ConflictError");
 const { BadRequestError } = require("../errors/BadRequestError");
 const { UnauthorizedError } = require("../errors/UnauthorizedError");
 
 // create a user based on incoming request
 const createUser = (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password, name } = req.body;
   User.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
@@ -16,8 +16,8 @@ const createUser = (req, res, next) => {
       }
       return bcrypt.hash(password, 10);
     })
-    .then((hash) => User.create({ email, password: hash, username }))
-    .then((user) => res.send({ email: user.email, username: user.username }))
+    .then((hash) => User.create({ email, password: hash, name }))
+    .then((user) => res.send({ email: user.email, name: user.name }))
     .catch((err) => {
       if (err.name === "ValidationError") {
         next(new BadRequestError("Invalid data sent to the server"));

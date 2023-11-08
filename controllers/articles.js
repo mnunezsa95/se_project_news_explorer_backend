@@ -1,9 +1,10 @@
 const ArticleItem = require("../models/article");
 const { NotFoundError } = require("../errors/NotFoundError");
 const { ForbiddenError } = require("../errors/ForbiddenError");
+const { BadRequestError } = require("../errors/BadRequestError");
 
 const getArticles = (req, res, next) => {
-  ArticleItem.find({})
+  ArticleItem.find({ owner: req.user._id })
     .then((articles) => res.send(articles))
     .catch((err) => next(err));
 };
@@ -23,7 +24,12 @@ const createArticle = (req, res, next) => {
     owner: req.user,
   })
     .then((article) => res.send(article))
-    .catch((err) => next(err));
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        throw new BadRequestError("Invalid data");
+      }
+      next(err);
+    });
 };
 
 const deleteArticle = (req, res, next) => {
