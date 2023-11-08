@@ -2,6 +2,7 @@ const ArticleItem = require("../models/article");
 const { NotFoundError } = require("../errors/NotFoundError");
 const { ForbiddenError } = require("../errors/ForbiddenError");
 const { BadRequestError } = require("../errors/BadRequestError");
+const { INVALID_DATA_ERROR_MESSAGE } = require("../utils/constants");
 
 const getArticles = (req, res, next) => {
   ArticleItem.find({ owner: req.user._id })
@@ -26,7 +27,7 @@ const createArticle = (req, res, next) => {
     .then((article) => res.send(article))
     .catch((err) => {
       if (err.name === "ValidationError") {
-        next(new BadRequestError("Invalid data"));
+        next(new BadRequestError(INVALID_DATA_ERROR_MESSAGE));
       }
       next(err);
     });

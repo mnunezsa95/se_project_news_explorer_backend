@@ -5,6 +5,11 @@ const { JWT_SECRET } = require("../utils/config");
 const { ConflictError } = require("../errors/ConflictError");
 const { BadRequestError } = require("../errors/BadRequestError");
 const { UnauthorizedError } = require("../errors/UnauthorizedError");
+const {
+  INCORRECT_CREDENTIALS_ERROR_MESSAGE,
+  INVALID_DATA_ERROR_MESSAGE,
+  DUPLICATE_EMAIL_ERROR_MESSAGE,
+} = require("../utils/constants");
 
 // create a user based on incoming request
 const createUser = (req, res, next) => {
@@ -12,7 +17,7 @@ const createUser = (req, res, next) => {
   User.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
-        throw new ConflictError("This email is already in use");
+        throw new ConflictError(DUPLICATE_EMAIL_ERROR_MESSAGE);
       }
       return bcrypt.hash(password, 10);
     })
@@ -20,7 +25,7 @@ const createUser = (req, res, next) => {
     .then((user) => res.send({ email: user.email, name: user.name }))
     .catch((err) => {
       if (err.name === "ValidationError") {
-        next(new BadRequestError("Invalid data sent to the server"));
+        next(new BadRequestError(INVALID_DATA_ERROR_MESSAGE));
       } else {
         next(err);
       }
@@ -34,7 +39,7 @@ const loginUser = (req, res, next) => {
     .then((user) => {
       if (!user) {
         return Promise.reject(
-          new UnauthorizedError("Incorrect password or email"),
+          new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE),
         );
       }
       return { user, matched: bcrypt.compare(password, user.password) };
@@ -42,7 +47,7 @@ const loginUser = (req, res, next) => {
     .then(({ user, matched }) => {
       if (!matched) {
         return Promise.reject(
-          new UnauthorizedError("Incorrect password or email"),
+          new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE),
         );
       }
       return user;
