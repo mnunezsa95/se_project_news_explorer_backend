@@ -26,7 +26,7 @@ const createArticle = (req, res, next) => {
     .then((article) => res.send(article))
     .catch((err) => {
       if (err.name === "ValidationError") {
-        throw new BadRequestError("Invalid data");
+        next(new BadRequestError("Invalid data"));
       }
       next(err);
     });
