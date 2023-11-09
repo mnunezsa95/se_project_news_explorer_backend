@@ -38,19 +38,15 @@ const loginUser = (req, res, next) => {
     .select("+password")
     .then((user) => {
       if (!user) {
-        return Promise.reject(
-          new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE),
-        );
+        throw new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE);
       }
-      return { user, matched: bcrypt.compare(password, user.password) };
-    })
-    .then(({ user, matched }) => {
-      if (!matched) {
-        return Promise.reject(
-          new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE),
-        );
-      }
-      return user;
+      return bcrypt.compare(password, user.password).then((isPasswordMatch) => {
+        console.log(isPasswordMatch);
+        if (!isPasswordMatch) {
+          throw new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE);
+        }
+        return user;
+      });
     })
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
