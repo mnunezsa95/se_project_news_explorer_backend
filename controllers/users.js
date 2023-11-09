@@ -41,7 +41,6 @@ const loginUser = (req, res, next) => {
         throw new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE);
       }
       return bcrypt.compare(password, user.password).then((isPasswordMatch) => {
-        console.log(isPasswordMatch);
         if (!isPasswordMatch) {
           throw new UnauthorizedError(INCORRECT_CREDENTIALS_ERROR_MESSAGE);
         }
