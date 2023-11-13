@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint .",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "build": "npm run build",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && scp -r -i ~/.ssh/id_ed25519 ./build/* mnunezsa95@news-explorer.mooo.com:/home/mnunezsa95/se_project_news_explorer_backend"
   },
   "keywords": [],
   "author": "Marlon Nunez",
