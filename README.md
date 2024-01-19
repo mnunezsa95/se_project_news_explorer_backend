@@ -1,6 +1,4 @@
-# se_project_news_explorer_backend
-
-# News Explorer Application (Frontend)
+# News Explorer Application (Backend)
 
 ## Overview
 
@@ -35,7 +33,7 @@ This represents the backend module of the News Explorer application, crafted wit
 
 - Domain (https://www.news-explorer.mooo.com): [Click here](https://www.news-explorer.mooo.com) to see the live version
 - API Domain: The API domain is https://api.news-explorer.mooo.com
-- Backend Code: The frontend code can be viewed [here](https://github.com/mnunezsa95/se_project_news_explorer_frontend)
+- Frontend Code: The frontend code can be viewed [here](https://github.com/mnunezsa95/se_project_news_explorer_frontend)
 - External News API: [Click here](https://newsapi.org/) to see the News API.
 
 ### Demo Credentials
