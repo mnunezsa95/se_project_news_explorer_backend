@@ -1,45 +1,55 @@
 # se_project_news_explorer_backend
 
+# News Explorer Application (Frontend)
+
 ## Overview
 
 - Intro - About the project
 - Description of the Project
+- Technologies
+- Figma Design
+- Links
+- Demo Credentials
 - Plans for Improvement
-- Running the Project
-- Testing
 
 ### Intro - About the project
 
-The back-end project serves as the backend server for the News Explorer application.
+The frontend component of News Explorer is constructed using React.js, CSS, and JavaScript, forming the visual framework for the News Explorer Application. The frontend component is hosted in a separate repository (refer to the 'Links' section for details).
+
+News Explorer functions as a news-article search engine, allowing users to input queries and retrieve relevant news articles (three at a time). Users can access brief article descriptions. If they have an account, they can sign up and save their favorite articles; otherwise, they can only view them.
+
+The application is designed to be responsive on all screen sizes, starting from 250px and above. Notably, the mobile design features a distinct hamburger menu compared to the tablet and laptop designs.
 
 ### Description of the Project
 
-The News Explorer back-end component was built using Node.js, Express.js, and MongoDB. Node.js serves as backend frame of this News Explorer Application. Express.js was used to create the REST API and MongoDB is used to create a database for storing user information.ES-Lint was used to guide code maintence and ensure code standards are being met.
+This represents the backend module of the News Explorer application, crafted with Node.JS and Express.js. It functions as the central hub for user authentication, user authorization, routing, file delivery to the frontend, and error management (utilizing controller functions and middlewares). In addition, Schema models were employed to validate MongoDB-related files. Additionally, security measures, such as the helmet module and a rate limiter, have been integrated to fortify against DDoS attacks.
 
 ### Technologies Used
 
-- Express.js : A back end web application framework for building RESTful APIs with Node.js, released as free and open-source software under the MIT License.
-- Node.js : A cross-platform, open-source server environment that can run on Windows, Linux, Unix, macOS, and more.
-- Mongoose : Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports Node.js.
-- REST API : A REST API is an API that conforms to the design principles of the REST, or representational state transfer architectural style.
-- Postman : Postman is an API Platform for developers to design, build, test and iterate their APIs.
-- ESLint : ESLint is a static code analysis tool for identifying problematic patterns found in JavaScript code.
-
-### Plans for Improvement
-
-- Add a feature for users to share their bookmarked news articles with other users.
-- Introduce features for users to change account information (email, password, name)
-- Add a feature for users to add a profile picture or avatar
-- Add a sort feature for users to sort articles in different orders (alphabetically, by date, etc)
-- Add a search feature for users to have more control over their search parameters (add a starting date / ending date, etc)
-- Add testing scripts to the project to allow for futher scaling while maintaing and preserving existing code functionality.
-
-### Running the Project
-
-`npm run start` — to launch the server
-`npm run dev` — to launch the server with the hot reload feature
+- Frontend: JavaScript, React.js, CSS3, AJAX
+- Backend: Node.js, Express.js, Mongoose, REST API, Google Cloud
+- Backend Security: Express Modules (CORS, Winston, bcrypt, rate limiting)
+- Tools Used: Webpack, Postman, ESLint
 
 ### Links
 
-- Domain: [https://www.news-explorer.mooo.com](https://www.news-explorer.mooo.com), [https://news-explorer.mooo.com](https://news-explorer.mooo.com)
-- API Domain: [https://api.news-explorer.mooo.com](https://api.news-explorer.mooo.com)
+- Domain (https://www.news-explorer.mooo.com): [Click here](https://www.news-explorer.mooo.com) to see the live version
+- API Domain: The API domain is https://api.news-explorer.mooo.com
+- Backend Code: The frontend code can be viewed [here](https://github.com/mnunezsa95/se_project_news_explorer_frontend)
+- External News API: [Click here](https://newsapi.org/) to see the News API.
+
+### Demo Credentials
+
+Use the following credentials to test out the application
+
+- Demo username: user1@gmail.com
+- Demo password: user1
+
+### Plans for Improvement
+
+1. Implement a capability for users to share their saved news articles with others.
+2. Introduce functionalities enabling users to modify account details such as email, password, and name.
+3. Incorporate a feature enabling users to upload a profile picture or avatar.
+4. Integrate a sorting feature, allowing users to arrange articles in various orders (alphabetically, by date, etc.).
+5. Introduce a search feature, empowering users to fine-tune search parameters, including adding starting and ending dates.
+6. Implement testing scripts to facilitate seamless scaling while ensuring the preservation of existing code functionality.
